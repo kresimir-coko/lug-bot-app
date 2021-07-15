@@ -8,6 +8,8 @@ import {useRouter} from 'next/router';
 
 import Footer from '../components/Footer';
 import Header from '../components/Header';
+import API_ENDPOINT from '../constants/apiEndpoint';
+import LugbotContext from '../utils/LugbotContext';
 
 const spritemap = '/icons.svg';
 
@@ -29,7 +31,7 @@ export default function Lugbot({Component, pageProps}) {
 		: 'Dashboard';
 
 	return (
-		<>
+		<LugbotContext.Provider value={pageProps.lugbot}>
 			<Head>
 				<title>{capitalizedTitle}</title>
 
@@ -52,6 +54,6 @@ export default function Lugbot({Component, pageProps}) {
 					<Footer />
 				</ClayIconSpriteContext.Provider>
 			</ClayLinkContext.Provider>
-		</>
+		</LugbotContext.Provider>
 	);
 }
