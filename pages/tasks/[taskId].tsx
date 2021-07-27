@@ -10,6 +10,7 @@ import useSWR from 'swr';
 import TaskProposal from '../../components/TaskProposal';
 import API_ENDPOINT from '../../constants/apiEndpoint';
 import cancelTask from '../../utils/cancelRunningTask';
+import mergeTask from '../../utils/mergeTask';
 
 const fetcher = (args) => fetch(args).then((res) => res.json());
 
@@ -97,13 +98,7 @@ export default function Task({lugbot, project, states, task, taskLog}) {
 										? 'success'
 										: 'secondary'
 								}
-								onClick={() =>
-									alert(
-										`Sending PR with the following changes:\n ${stagedChanges.join(
-											'\n'
-										)}`
-									)
-								}
+								onClick={() => mergeTask(task.id)}
 							>
 								{isLocalInstance
 									? `Merge (${stagedChanges.length})`
